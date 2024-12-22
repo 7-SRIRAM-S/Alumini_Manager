@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <title>Alumni Management</title>
+</head>
+<body>
+    <h1>Alumni List</h1>
+    <a href="/add">Add New Alumni</a>
+    <form action="/search" method="POST" style="margin-top: 10px;">
+        <input type="text" name="search" placeholder="Search by name, batch, department, or status">
+        <button type="submit">Search</button>
+    </form>
+    <table border="1" style="margin-top: 20px;">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Batch</th>
+                <th>Department</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Percentage</th>
+                <th>Current Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for alumni in alumni %}
+            <tr>
+                <td>{{ alumni.id }}</td>
+                <td>{{ alumni.name }}</td>
+                <td>{{ alumni.batch }}</td>
+                <td>{{ alumni.department }}</td>
+                <td>{{ alumni.email }}</td>
+                <td>{{ alumni.phone }}</td>
+                <td>{{ alumni.percentage }}</td>
+                <td>{{ alumni.current_status }}</td>
+                <td>
+                    <a href="/update/{{ alumni.id }}">Edit</a> |
+                    <a href="/delete/{{ alumni.id }}" onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+<footer>
+        <p>&copy; 2024 SRIRAM All Rights Reserved.</p>
+    </footer>
+</html>
